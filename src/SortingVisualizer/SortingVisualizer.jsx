@@ -1,6 +1,7 @@
 import React from 'react';
 import './SortingVisualizer.css';
 import {getMergeSortAnimations} from '../SortingAlgorithms/sortingAlgorithms.js';
+import {getBubbleSortAnimations} from '../SortingAlgorithms/sortingAlgorithms.js';
 
 const PRIMARY_COLOR = '#778899';
 const SECONDARY_COLOR = 'red';
@@ -52,13 +53,13 @@ export default class SortingVisualizer extends React.Component{
         }
     }
     quickSort(){
-
     }
     heapSort(){
 
     }
     bubbleSort(){
-
+        const animations = getBubbleSortAnimations(this.state.array);
+        this.setState(animations);
     }
 
     render(){
