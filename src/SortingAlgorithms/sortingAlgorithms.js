@@ -51,17 +51,26 @@ function merge(array,helper,start,middle,end,animations){
 export function getBubbleSortAnimations(array){
     const animations = [];
     let numSwaps;
+    let numRuns = 1;
     do{
         numSwaps = 0;
         for(let i = 0; i < array.length -1; i++){
             if(array[i] > array[i+1]){
+                animations.push([i,'swap']);
                 let temp = array[i+1];
                 array[i+1] = array[i];
                 array[i] = temp;
                 numSwaps++;
             }
         }
+        animations.push([0,'last']);
+        numRuns++;
     }while(numSwaps != 0);
 
-    return array;
+    while(numRuns <= array.length){
+        animations.push([array.length-numRuns,'last']);
+        numRuns++;
+    }
+
+    return animations;
 }

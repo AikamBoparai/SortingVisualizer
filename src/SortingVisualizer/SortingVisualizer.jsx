@@ -22,10 +22,11 @@ export default class SortingVisualizer extends React.Component{
     resetArray(){
         const array = [];
 
-        for(let i = 0; i < 400; i++){
+        for(let i = 0; i < 200; i++){
             array.push(randomIntInInterval(5,850));
         }
         this.setState({array});
+        this.resetColors();
     }
 
     mergeSort(){
@@ -57,9 +58,38 @@ export default class SortingVisualizer extends React.Component{
     heapSort(){
 
     }
+
+    resetColors(){
+        const arrayBars = document.getElementsByClassName('array-bar');
+        for(let i =0; i < arrayBars.length; i++){
+            arrayBars[i].style.backgroundColor = PRIMARY_COLOR;
+        }
+    }
     bubbleSort(){
         const animations = getBubbleSortAnimations(this.state.array);
-        this.setState(animations);
+        let counter = 1;
+        const arrayBars = document.getElementsByClassName('array-bar');
+        for(let i =0; i < animations.length; i++){
+            const [barOneIdx,desc] = animations[i];
+            const barOne = arrayBars[barOneIdx];
+            const barTwo = arrayBars[barOneIdx+1];
+            if(desc == 'swap'){
+                setTimeout(() => {
+                    const tempHeight = barOne.style.height;
+                    barOne.style.height = barTwo.style.height;
+                    barTwo.style.height = tempHeight;
+                }, i * 1);
+            }
+            else{
+                setTimeout(() => {
+                    arrayBars[arrayBars.length - counter].style.backgroundColor = 'green';
+                    counter++;
+                }, i * 1);
+            }
+        }
+
+        
+
     }
 
     render(){
