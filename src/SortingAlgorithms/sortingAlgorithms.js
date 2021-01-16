@@ -6,6 +6,12 @@ export function getMergeSortAnimations(array){
     return animations;
 }
 
+function swap(array,firstIdx,secondIdx){
+    const temp = array[firstIdx];
+    array[firstIdx] = array[secondIdx];
+    array[secondIdx] = temp;
+}
+
 function mergeSort(array,helper,start,end,animations){
     if(start < end){
         const middle = Math.floor((start+end)/2);
@@ -57,9 +63,7 @@ export function getBubbleSortAnimations(array){
         for(let i = 0; i < array.length -1; i++){
             if(array[i] > array[i+1]){
                 animations.push([i,'swap']);
-                let temp = array[i+1];
-                array[i+1] = array[i];
-                array[i] = temp;
+                swap(array,i,i+1);
                 numSwaps++;
             }
         }
@@ -73,4 +77,34 @@ export function getBubbleSortAnimations(array){
     }
 
     return animations;
+}
+
+export function getQuickSortAnimations(array){
+    const animations = [];
+    quickSort(array,0,array.length-1);
+    return array;
+}
+
+function quickSort(array,left,right){
+    let index = partition(array,left,right);
+    if(left < index - 1){
+        quickSort(array,left,index-1);
+    }
+    if(index < right){
+        quickSort(array,index,right);
+    }
+}
+
+function partition(array,left,right){
+    let pivot = array[Math.floor((left+right)/2)]
+    while (left <= right){
+        while(pivot > array[left])left++;
+        while(pivot < array[right])right--;
+        if(left <= right){
+            swap(array,left,right);
+            left++;
+            right--;
+        }
+    }
+    return left;
 }
