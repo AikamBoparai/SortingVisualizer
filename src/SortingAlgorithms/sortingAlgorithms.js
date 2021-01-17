@@ -81,12 +81,12 @@ export function getBubbleSortAnimations(array){
 
 export function getQuickSortAnimations(array){
     const animations = [];
-    quickSort(array,0,array.length-1);
+    quickSort(array,0,array.length-1,animations);
     return array;
 }
 
-function quickSort(array,left,right){
-    let index = partition(array,left,right);
+function quickSort(array,left,right,animations){
+    let index = partition(array,left,right,animations);
     if(left < index - 1){
         quickSort(array,left,index-1);
     }
@@ -95,13 +95,20 @@ function quickSort(array,left,right){
     }
 }
 
-function partition(array,left,right){
-    let pivot = array[Math.floor((left+right)/2)]
+function partition(array,left,right,animations){
+    let pivotIndex = Math.floor((left+right)/2);
+    let pivot = array[pivotIndex];
+    animations.push([pivotIndex,pivotIndex]);
     while (left <= right){
-        while(pivot > array[left])left++;
-        while(pivot < array[right])right--;
+        while(pivot > array[left]){
+            left++;
+        }
+        while(pivot < array[right]){
+            right--;
+        }
         if(left <= right){
             swap(array,left,right);
+            animations.push([left,right]); 
             left++;
             right--;
         }
