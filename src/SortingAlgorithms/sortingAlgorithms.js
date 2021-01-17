@@ -107,6 +107,7 @@ function partition(array,left,right,animations){
             right--;
         }
         if(left <= right){
+            animations.push([left,right,'swapColor']);
             animations.push([left,right,'swap']);
             swap(array,left,right);
             left++;

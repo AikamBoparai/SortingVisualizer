@@ -44,14 +44,14 @@ export default class SortingVisualizer extends React.Component{
             setTimeout(() => {
             barOneStyle.backgroundColor = color;
             barTwoStyle.backgroundColor = color;
-            }, i * 1);
+            }, i * 5);
         } 
         else {
                 setTimeout(() => {
                 const [barOneIdx, newHeight] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
                 barOneStyle.height = `${newHeight}px`;
-                }, i * 1);
+                }, i * 5);
             }
         }
     }
@@ -60,15 +60,23 @@ export default class SortingVisualizer extends React.Component{
         for(let i = 0; i < animations.length; i++){
             const arrayBars = document.getElementsByClassName('array-bar');
             const[firstIdx,secondIdx,desc] = animations[i];
-            if(desc == 'pivotChange'){
+            if(desc === 'pivotChange'){
                 setTimeout(() => {
-                    arrayBars[firstIdx].style.backgroundColor = 'gold';
-                }, i * 30);
+                    arrayBars[firstIdx].style.backgroundColor = TERTIARY_COLOR;
+                }, i * 25);
             }
-            else if(desc == 'pivotRevert'){
+            else if(desc === 'pivotRevert'){
                 setTimeout(() => {
                     arrayBars[firstIdx].style.backgroundColor = PRIMARY_COLOR;
-                }, i * 30);
+                }, i * 25);
+            }
+            else if(desc === 'swapColor'){
+                const barOne = arrayBars[firstIdx];
+                const barTwo = arrayBars[secondIdx];
+                setTimeout(() => {
+                    barOne.style.backgroundColor = SECONDARY_COLOR;
+                    barTwo.style.backgroundColor = SECONDARY_COLOR;
+                }, i * 25);
             }
             else{
                 const barOne = arrayBars[firstIdx];
@@ -77,7 +85,12 @@ export default class SortingVisualizer extends React.Component{
                     const tempHeight = barOne.style.height;
                     barOne.style.height = barTwo.style.height;
                     barTwo.style.height = tempHeight;
-                }, i * 30);
+                }, i * 25);
+
+                setTimeout(() => {
+                    barOne.style.backgroundColor = PRIMARY_COLOR;
+                    barTwo.style.backgroundColor = PRIMARY_COLOR;
+                }, i * 25);
             }
         }
     }
@@ -104,13 +117,13 @@ export default class SortingVisualizer extends React.Component{
                     const tempHeight = barOne.style.height;
                     barOne.style.height = barTwo.style.height;
                     barTwo.style.height = tempHeight;
-                }, i * 1);
+                }, i * 2);
             }
             else{
                 setTimeout(() => {
                     arrayBars[arrayBars.length - counter].style.backgroundColor = 'green';
                     counter++;
-                }, i * 1);
+                }, i * 2);
             }
         }
 
