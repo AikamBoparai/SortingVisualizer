@@ -6,6 +6,7 @@ import {getQuickSortAnimations} from '../SortingAlgorithms/sortingAlgorithms.js'
 
 const PRIMARY_COLOR = '#778899';
 const SECONDARY_COLOR = 'red';
+const TERTIARY_COLOR = 'gold';
 
 export default class SortingVisualizer extends React.Component{
     constructor(props){
@@ -56,7 +57,29 @@ export default class SortingVisualizer extends React.Component{
     }
     quickSort(){
         const animations = getQuickSortAnimations(this.state.array);
-        this.setState({animations});
+        for(let i = 0; i < animations.length; i++){
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const[firstIdx,secondIdx,desc] = animations[i];
+            if(desc == 'pivotChange'){
+                setTimeout(() => {
+                    arrayBars[firstIdx].style.backgroundColor = 'gold';
+                }, i * 30);
+            }
+            else if(desc == 'pivotRevert'){
+                setTimeout(() => {
+                    arrayBars[firstIdx].style.backgroundColor = PRIMARY_COLOR;
+                }, i * 30);
+            }
+            else{
+                const barOne = arrayBars[firstIdx];
+                const barTwo = arrayBars[secondIdx];
+                setTimeout(() => {
+                    const tempHeight = barOne.style.height;
+                    barOne.style.height = barTwo.style.height;
+                    barTwo.style.height = tempHeight;
+                }, i * 30);
+            }
+        }
     }
     heapSort(){
 
