@@ -1,8 +1,8 @@
 import React from 'react';
 import './SortingVisualizer.css';
-import {getMergeSortAnimations} from '../SortingAlgorithms/sortingAlgorithms.js';
-import {getBubbleSortAnimations} from '../SortingAlgorithms/sortingAlgorithms.js';
-import {getQuickSortAnimations} from '../SortingAlgorithms/sortingAlgorithms.js';
+import {getMergeSortAnimations} from '../SortingAlgorithms/mergeSort.js';
+import {getBubbleSortAnimations} from '../SortingAlgorithms/bubbleSort.js';
+import {getQuickSortAnimations} from '../SortingAlgorithms/quickSort.js';
 
 const PRIMARY_COLOR = '#778899';
 const SECONDARY_COLOR = 'red';
