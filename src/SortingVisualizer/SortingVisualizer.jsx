@@ -3,6 +3,7 @@ import './SortingVisualizer.css';
 import {getMergeSortAnimations} from '../SortingAlgorithms/mergeSort.js';
 import {getBubbleSortAnimations} from '../SortingAlgorithms/bubbleSort.js';
 import {getQuickSortAnimations} from '../SortingAlgorithms/quickSort.js';
+import {getHeapSortAnimations} from '../SortingAlgorithms/heapSort.js';
 
 const PRIMARY_COLOR = '#778899';
 const SECONDARY_COLOR = 'red';
@@ -95,7 +96,7 @@ export default class SortingVisualizer extends React.Component{
         }
     }
     heapSort(){
-
+        this.setState(getHeapSortAnimations(this.state.array));
     }
 
     resetColors(){
