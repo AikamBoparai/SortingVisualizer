@@ -1,13 +1,3 @@
-html{
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-body{
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
 .array-container{
     position: absolute;
     left: 50px;
