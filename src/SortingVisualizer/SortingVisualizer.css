@@ -1,9 +1,9 @@
 .array-container{
-    position: absolute;
-    left: 50px;
-    right: 50px;
+    margin: auto;
     overflow: hidden;
     white-space: nowrap;
+    width: 100%;
+    height: 100%;
 }
 
 .array-bar{
@@ -13,11 +13,17 @@
     margin: 0 1px;
 }
 
+@media(max-width: 767px) {
+	button{
+        font-size: 1.8vw !important;
+    }
+}
+
 button{
     display: inline-block;
     padding: 0.8em 1.5em;
     margin: 1em 0.5em 0.1em;
-    border:0.10em solid rgba(255,255,255,0);
+    border:0.1em solid rgba(255,255,255,0);
     border-radius:2em;
     box-sizing: border-box;
     text-decoration:none;
