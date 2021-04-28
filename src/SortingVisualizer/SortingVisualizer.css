@@ -48,22 +48,26 @@ button:hover{
     border-color:rgba(255,255,255,1); 
 }
 
-.new-array-btn{
+header{
+    width: 100%;
+    padding-bottom: 1px !important;
+}
+#new-array-btn{
     background-color:#4e9af1
 }
 
-.merge-sort-btn{
+#merge-sort-btn{
     background-color: #f14e4e;
 }
-.quick-sort-btn{
+#quick-sort-btn{
     background-color: #ffb300;
 }
 
-.heap-sort-btn{
+#heap-sort-btn{
     background-color: #9a4ef1;
 }
 
-.bubble-sort-btn{
+#bubble-sort-btn{
     background-color: #f14ebd;
 }
 
@@ -99,11 +103,6 @@ button:hover{
 
 .fs-4{
     font-size: calc(2rem + .3vw)!important;
-}
-
-header{
-    width: 100%;
-    padding-bottom: 1px !important;
 }
 
 .mb-0{
