@@ -29,7 +29,6 @@ export default class SortingVisualizer extends React.Component{
         const array = [];
         var numBars = window.innerWidth * 0.15;
         var maxHeight = window.innerHeight * 0.85;
-        console.log(window.innerHeight);
         for(let i = 0; i < numBars; i++){
             array.push(randomIntInInterval(5,maxHeight));
         }
@@ -52,6 +51,7 @@ export default class SortingVisualizer extends React.Component{
     }
 
     mergeSort(){
+        this.fixArrayBars();
         this.toggleButtons(true);
         var time = 0;
         animations = getMergeSortAnimations(this.state.array);
@@ -83,6 +83,7 @@ export default class SortingVisualizer extends React.Component{
         }, time);
     }
     quickSort(){
+        this.fixArrayBars();
         this.toggleButtons(true);
         var time = 0;
         animations = getQuickSortAnimations(this.state.array);
@@ -129,27 +130,28 @@ export default class SortingVisualizer extends React.Component{
         }, time); 
     }
     heapSort(){
+        this.fixArrayBars();
         this.toggleButtons(true);
         var time = 0;
-        var timedelay = window.innerWidth < 500 ? 15 : 5;
+        var timedelay = window.innerWidth < 500 ? 15 : 3;
         animations = getHeapSortAnimations(this.state.array);
         let counter = 1;
+        const arrayBars = document.getElementsByClassName('array-bar');
         for(let i = 0; i < animations.length; i++){
-            const arrayBars = document.getElementsByClassName('array-bar');
             const[firstIdx,secondIdx,desc] = animations[i];
             const barOne = arrayBars[firstIdx];
             const barTwo = arrayBars[secondIdx];
-            if(i % 2 == 0){
+            if(i % 2 == 0 && desc == 'reg'){
                 time = i* timedelay;
                 setTimeout(() => {
                     barOne.style.backgroundColor = SECONDARY_COLOR;
                     barTwo.style.backgroundColor = SECONDARY_COLOR;
-                    const tempHeight = barOne.style.height;
+                    var tempHeight = barOne.style.height;
                     barOne.style.height = barTwo.style.height;
                     barTwo.style.height = tempHeight;
                 }, i * timedelay);
             }
-            else{
+            else if(i % 2 == 1 && desc == 'reg'){
                 time = i* timedelay;
                 setTimeout(() => {
                     barOne.style.backgroundColor = PRIMARY_COLOR;
@@ -157,9 +159,12 @@ export default class SortingVisualizer extends React.Component{
                 }, i * timedelay);
             }
 
-            if(desc == 'max' && i %2 == 1){
+            if(desc == 'max' && i % 2 == 0){
                 time = i* timedelay;
                 setTimeout(() => {
+                    const tempHeight = barOne.style.height;
+                    barOne.style.height = barTwo.style.height;
+                    barTwo.style.height = tempHeight;
                     arrayBars[arrayBars.length - counter].style.backgroundColor = 'green';
                     counter++;
                 }, i * timedelay);
@@ -170,7 +175,6 @@ export default class SortingVisualizer extends React.Component{
         setTimeout(() => {
             this.toggleButtons(false);
         }, time); 
-       
     }
 
     resetColors(){
@@ -180,6 +184,7 @@ export default class SortingVisualizer extends React.Component{
         }
     }
     bubbleSort(){
+        this.fixArrayBars();
         this.toggleButtons(true);
         var time = 0;
         animations = getBubbleSortAnimations(this.state.array);
@@ -209,6 +214,15 @@ export default class SortingVisualizer extends React.Component{
         setTimeout(() => {
             this.toggleButtons(false);
         }, time)
+    }
+
+    fixArrayBars(){
+        const arrayBars = document.getElementsByClassName('array-bar');
+        for(let i =0; i < arrayBars.length; i++){
+            if(parseInt(arrayBars[i].style.height, 10) != this.state.array[i]){
+                arrayBars[i].style.height = this.state.array[i].toString() + "px";
+            }
+        }
     }
 
     render(){

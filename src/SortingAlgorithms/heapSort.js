@@ -13,19 +13,25 @@ function swap(array,firstIdx,secondIdx){
 function heapSort(array,animations){
     var last = array.length;
     
-    for(var i = Math.floor(array.length/2); i >= 0; i--){
+    for(let i = Math.floor(array.length/2) - 1; i >= 0; i--){
         heapDown(array,array.length,i,animations);
     }
 
-    for(i = array.length -1; i > 0; i--){
-        animations.push([0,i,'max']);
-        animations.push([0,i,'max']);
-        swap(array,0,i);
-        last--;
-        heapDown(array,last,0,animations);
+    for(let k = array.length -1; k > 0; k--){
+        animations.push([0,k,'max']);
+        animations.push([0,k,'max']);
+        swap(array,0,k);
+        heapDown(array,k,0,animations);
     }
     animations.push([0,0,'max']);
     animations.push([0,0,'max']);
+    //check to see if array is sorted so we know if animations are broken or if the array isnt sorted properly
+    var arrayS = "[";
+    for(let j = 0; j < array.length; j++){
+            arrayS += array[j].toString() + ",";
+    }
+    arrayS += "]";
+    console.log(arrayS);
 }
 
 function heapDown(arr, length, index,animations){
